@@ -4,10 +4,17 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
 import os
 from dotenv import load_dotenv
+import certifi
 
 load_dotenv()
 MONGO_URL = os.getenv("MONGO_URL")
-client = AsyncIOMotorClient(MONGO_URL) # Making APi more robust
+client = AsyncIOMotorClient(
+    MONGO_URL,
+    tls=True,
+    tlsCAFile=certifi.where()
+)
+# client = AsyncIOMotorClient(MONGO_URL) # Making APi more robust
+
 mongodb_db = client["gen_ai"]
 mongodb_collection = mongodb_db["api_testing"]
 
