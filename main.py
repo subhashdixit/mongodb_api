@@ -32,7 +32,7 @@ def mongodb_get_data_helper(doc):
     del doc["_id"]
     return doc
 
-@app.post("/mongodb/get_data")
+@app.get("/mongodb/get_data")
 async def get_mongodb_data():
     items = []
     cursor = mongodb_collection.find({})
@@ -41,4 +41,6 @@ async def get_mongodb_data():
     return items
 
 # To host this api on cloud, we need to push this code to repo then from repo to cloud so that the api can be accessible to anyone
- 
+# Render is a cloud platform, free to use till certain limits
+# uvicorn main:app --host 0.0.0.0 --port $PORT
+# https://mongodb-api-k4ha.onrender.com -- Render UR
